@@ -27,7 +27,7 @@ function compRegEx() {
     document.getElementById("output2").innerHTML = output2;
 }
 
-function compEqEq() {
+function compUsing2eql() {
     var input31 = document.getElementById("str31").value;
     var input32 = document.getElementById("str32").value;
     var l31 = input31.length;
@@ -51,7 +51,7 @@ function compEqEq() {
     document.getElementById("output32").innerHTML = output32;
 }
 
-function compEqEqEq() {
+function compUsing3eql() {
     var input41 = document.getElementById("str41").value;
     var input42 = document.getElementById("str42").value;
     var output4;
@@ -62,4 +62,29 @@ function compEqEqEq() {
         output4 = "Both Strings Are Unequal";
     }
     document.getElementById("output4").innerHTML = output4;
+}
+
+function compUsingUser (){
+    var input51 = document.getElementById("str51").value;
+    var input52 = document.getElementById("str52").value;
+    var output5;
+    var areEqual = true;
+
+    if (input51.length !== input52.length) {
+        areEqual = false;
+    } else {
+        for (var i = 0; i < input51.length; i++) {
+            if (input51[i] !== input52[i]) {
+                areEqual = false;
+                break;
+            }
+        }
+    }
+    if (areEqual==true) {
+        output5 = "Both Stings Are Equal";
+    }
+    else {
+        output5 = "Both Strings Are Unequal";
+    }
+    document.getElementById("output5").innerHTML = output5;
 }

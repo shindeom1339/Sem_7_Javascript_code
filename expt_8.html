@@ -46,18 +46,25 @@
     <div id="focus">
       <h4>On Focus Event</h4>
       <input type="text" onfocus="focusele()" onblur="mouseout()" />
-      <!--<input type="text" id="onfocus">-->
     </div>
+  </div>
+  <br>
+  <div>
+    <p id="text"></p>
   </div>
   <script>
     function mouseover() {
       document.getElementById("bd").style.backgroundColor = "#f96167";
+      document.getElementById("text").innerHTML = "Hover effect activated!";
+
     }
     function mouseout() {
       document.getElementById("bd").style.backgroundColor = "#fff";
+      document.getElementById("text").innerHTML = "";
     }
     function focusele() {
       document.getElementById("bd").style.backgroundColor = "#fce77d";
+      document.getElementById("text").innerHTML = "Focus effect activated";
     }
   </script>
 </body>

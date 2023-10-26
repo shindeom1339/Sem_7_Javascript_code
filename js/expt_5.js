@@ -20,5 +20,5 @@ function countdown() {
             document.getElementById("output").innerHTML = "Countdown Timer Expired";
         }
     }
-        , 500);
+    ,500);
 }

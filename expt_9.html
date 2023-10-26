@@ -117,13 +117,21 @@
     </table>
   </form>
 
-  <div id="welcomeMessage" style="display: none">
+  <div id="welcomeMessage" style="display: none;text-align: center;">
     <h2>Congratulations!</h2>
     <p>
       Welcome, <span id="welcomeName"></span>! Your information has been
       successfully submitted.
     </p>
+    <button onclick="goBackButton()">Go Back!</button>
   </div>
+  <script type="text/javascript">
+    function goBackButton(){
+      document.getElementById("studentForm").style.display="block";
+      document.getElementById("welcomeMessage").style.display="none";
+      document.getElementById("studentForm").reset();
+    }
+  </script>
 
   <script type="text/javascript">
     function validateForm() {

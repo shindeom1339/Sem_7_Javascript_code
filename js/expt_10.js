@@ -1,33 +1,30 @@
-// Import the 'readline' module for reading user input 
-const readline = require('readline');
+const table = process.argv[2]; // Get the table value from the command-line argument
 
-// Create an interface for reading user input 
-    const rl = readline.createInterface({
-    input: process.stdin, 
-    output: process.stdout
-});
-
-// Function to generate and print the multiplication table 
-function printTable(number) {
-console.log(`Multiplication Table for ${number}:`); 
-for (let i = 1; i <= 10; i++) {
-console.log(`${number} x ${i} = ${number * i}`);
-    }
-}
-
-// Ask the user to enter a number 
-rl.question('Enter a number: ', (input) => {
-const number = parseInt(input);
-
-// Check if the input is a valid number 
-if (isNaN(number)) {
-console.log('Please enter a valid number.');
+if (!table) {
+  console.log('Please provide an integer as a command-line argument.');
 } else {
-// Generate and print the multiplication table 
-printTable(number);
+  const length = 10;
+
+  console.log("Name: Om Shinde Roll no.: 42360");
+  console.log("Multiplication table " + table + " using for loop.");
+  for (let i = 1; i <= length; i++) {
+    const result = i * table;
+    console.log(`${table} * ${i} = ${result}`);
+  }
+
+  console.log("Multiplication table " + table + " using while loop.");
+  let i = 1;
+  while (i <= length) {
+    const result = i * table;
+    console.log(`${table} * ${i} = ${result}`);
+    i++;
+  }
+
+  console.log("Multiplication table " + table + " using do-while loop.");
+  i = 1;
+  do {
+    const result = i * table;
+    console.log(`${table} * ${i} = ${result}`);
+    i++;
+  } while (i <= length);
 }
-
-// Close the readline interface
-rl.close();
-});
-

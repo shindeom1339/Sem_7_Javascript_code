@@ -23,5 +23,9 @@ function replaceChar() {
     var toReplace = document.getElementById("toReplace").value;
     var withReplace = document.getElementById("replaceWith").value;
     var replaced = input3.replace(toReplace, withReplace);
-    document.getElementById("output3").innerHTML = replaced;
+    if (input3.includes(toReplace)){
+        document.getElementById("output3").innerHTML = replaced;
+    } else {
+        alert("Given element is not present in the string!")
+    }
 }
