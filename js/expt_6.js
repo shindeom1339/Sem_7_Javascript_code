@@ -87,7 +87,7 @@ function replaceByIndex() {
 }
 
 function replaceByValue() {
-  let valueToReplace = document.getElementById("replace-value").value;
+  let valueToReplace = document.getElementById("replace-value2").value;
   let newValue = document.getElementById("replace-new-value").value;
 
   let index = Array.indexOf(valueToReplace);
