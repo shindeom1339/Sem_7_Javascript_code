@@ -1,80 +1,121 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Experiment 7 - Array Operations</title>
-</head>
 
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
 <body style="text-align: center;">
     <h2>42360_Om Shinde</h2>
     <h3>Exp no. 7: Array Operations</h3>
-    <p>Enter the size of the array:</p>
-    <input type="number" id="arraySize" placeholder="Enter size">
 
-    <div id="addObjectsInput">
-        <p>Enter an object (e.g., {"name": "John", "age": 30}):</p>
-        <input type="text" id="inputObject" placeholder="Enter object">
-        <button onclick="addObjectToArray()">Add Object to Array</button>
-    </div>
+    <label for="arrayLength">Enter array length:</label>
+    <input type="number" id="arrayLengthInput">
+    <br><br>
 
-    <div id="checkArrayAtIndexInput">
-        <p>Enter an index to check:</p>
-        <input type="number" id="indexToCheck" placeholder="Enter index">
-        <button onclick="checkArrayAtIndex()">Check Array at Index</button>
-    </div>
+    <label for="objectArrayInput">Enter an object or an array:</label>
+    <input type="text" id="objectArrayInput">
+    <button onclick="addObjectAndArray()">Add Object or Array</button>
+    <br><br>
 
-    <p>Select an operation:</p>
-    <select id="operationSelect">
-        <option value="append">View Array</option>
-        <option value="checkIndex">Check Array at Index</option>
-    </select>
+    <label for="isArrayIndex">Enter an index to check isArray:</label>
+    <input type="number" id="isArrayIndex">
+    <button onclick="checkIsArrayAtIndex()">Check isArray at Index</button>
+    <div id="isArrayOutput"></div>
+    <br>
 
-    <button onclick="performOperation()">Perform Operation</button>
+    <div id="arrayOutput"></div>
+    <br>
 
-    <div id="result"></div>
+    <button onclick="createAndDisplayTable()">Create Table</button>
+    <button onclick="resetArray()">Reset</button>
+    <div id="arrayLengthMessage"></div>
+
+    <h3>Array Elements and Data Types</h3>
+    <table id="arrayTable">
+        <thead>
+            <tr>
+                <th>Element</th>
+                <th>Data Type</th>
+                <th>Is Array?</th>
+            </tr>
+        </thead>
+        <tbody id="arrayTableBody"></tbody>
+    </table>
 
     <script>
-        const objectArray = [];
+        let userArray = [];
 
-        function addObjectToArray() {
-            const inputObject = document.getElementById('inputObject').value;
+        function addObjectAndArray() {
+            const input = document.getElementById("objectArrayInput").value;
+            const arrayLengthInput = document.getElementById("arrayLengthInput").value;
+            const arrayLength = parseInt(arrayLengthInput, 10);
+
+            if (userArray.length >= arrayLength) {
+                document.getElementById("arrayLengthMessage").innerHTML = "Array length exceeded.";
+                return;
+            }
 
             try {
-                const object = JSON.parse(inputObject);
-                objectArray.push(object);
-                document.getElementById('inputObject').value = ''; // Clear the input field
-                alert('Object added to the array!');
+                const parsedInput = JSON.parse(input);
+                userArray.push(parsedInput);
             } catch (error) {
-                alert('Invalid object format. Please enter a valid JSON object.');
+                userArray.push(input);
+            }
+
+            displayArray();
+        }
+
+        function displayArray() {
+            const arrayOutputDiv = document.getElementById("arrayOutput");
+            arrayOutputDiv.innerHTML = `Array: [${userArray.map(obj => Array.isArray(obj) ? `[${obj}]` : JSON.stringify(obj)).join(', ')}]`;
+
+            document.getElementById("arrayLengthMessage").innerHTML = "";
+        }
+
+        function checkIsArrayAtIndex() {
+            const index = document.getElementById("isArrayIndex").value;
+            const element = userArray[index];
+            const isArray = Array.isArray(element);
+            const isArrayOutput = document.getElementById("isArrayOutput");
+            isArrayOutput.innerHTML = `Element at index ${index} is an array: ${isArray}`;
+        }
+
+        function createAndDisplayTable() {
+            const tableBody = document.getElementById("arrayTableBody");
+            tableBody.innerHTML = "";
+
+            for (let i = 0; i < userArray.length; i++) {
+                const element = userArray[i];
+                const dataType = typeof element;
+                const isArray = Array.isArray(element);
+
+                const row = `<tr><td>${Array.isArray(element) ? `[${element}]` : JSON.stringify(element)}</td><td>${dataType}</td><td>${isArray}</td></tr>`;
+                tableBody.innerHTML += row;
             }
         }
 
-        function checkArrayAtIndex() {
-            const indexToCheck = parseInt(document.getElementById('indexToCheck').value);
-
-            if (indexToCheck >= 0 && indexToCheck < objectArray.length) {
-                const isArrayAtIndex = Array.isArray(objectArray[indexToCheck]);
-                alert(`The object at index ${indexToCheck} is an array: ${isArrayAtIndex}`);
-            } else {
-                alert('Invalid index. Please enter a valid index.');
-            }
-        }
-
-        function performOperation() {
-            const arraySize = parseInt(document.getElementById('arraySize').value);
-            const selectedOperation = document.getElementById('operationSelect').value;
-
-            if (selectedOperation === 'append') {
-                if (arraySize < 1) {
-                    document.getElementById('result').innerText = 'Array size should be at least 1.';
-                    return;
-                }
-
-                document.getElementById('result').innerHTML = '<pre>' + JSON.stringify(objectArray, null, 2) + '</pre';
-            } else if (selectedOperation === 'checkIndex') {
-                // You can add specific logic here for the "Check Array at Index" operation if needed.
-            }
+        function resetArray() {
+            userArray = [];
+            displayArray();
         }
     </script>
 </body>
-
 </html>
